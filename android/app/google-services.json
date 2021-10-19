@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "162926517511",
+    "project_id": "anychat-46ae0",
+    "storage_bucket": "anychat-46ae0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162926517511:android:56c4feaeb31f2cad9fb9a2",
+        "android_client_info": {
+          "package_name": "com.anychat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162926517511-jb6nhoehnjprp1eajp697gb2o1i6r7s5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX7S6Q-OP76VVf9mXzsri2fGJw-qrByz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162926517511-jb6nhoehnjprp1eajp697gb2o1i6r7s5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162926517511:android:ff1b2e797a9dae3d9fb9a2",
+        "android_client_info": {
+          "package_name": "com.mytodo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162926517511-jb6nhoehnjprp1eajp697gb2o1i6r7s5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX7S6Q-OP76VVf9mXzsri2fGJw-qrByz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162926517511-jb6nhoehnjprp1eajp697gb2o1i6r7s5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
