@@ -12,19 +12,20 @@ export default function AddInput({ submitHandler }) {
   const onChangeText = (text) => {
     setValue(text);
   };
-  const CheckEmpty = (value, date) => {
-    if(value.length ==""){
-      alert('NO data');
-    }else{
-      setValue(submitHandler(value, date));
-      
-    }
-  };
+  // const CheckEmpty = (value, date) => {
+  //   if(value.trim() !=0){
+  //     setValue(submitHandler(value, date));
+  //   }else{
+  //     alert('NO data');
+  //   }
+  // };
+
+  
 
   return (
     <ComponentContainer>
       <InputContainer>
-        <Input placeholder="Add Task..." onChangeText={onChangeText} />
+        <Input placeholder="Add Task..." onChangeText={onChangeText} value={value} />
       </InputContainer>
       <CalendarButton onPress={() => setOpen(true)} >
         <AntDesign name="calendar" size={24} color="#00bf6c" />
@@ -44,7 +45,12 @@ export default function AddInput({ submitHandler }) {
       />
       <SubmitButton
         onPress={() => {
-          CheckEmpty(value, date);
+          if(value.trim() !=0){
+            setValue(submitHandler(value, date));
+          }else{
+            alert('NO data');
+          }
+          return;
           // setValue(submitHandler(value, date));
         }}
       >

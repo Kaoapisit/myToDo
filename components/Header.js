@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-let today = new Date().toUTCString().slice(0, 16);
+var d = new Date();
+    d.setFullYear(2564);
+let today = d.toUTCString().slice(0, 16);
 
 export default function Header({ searchItem }) {
     const [value, setValue] = useState("");
