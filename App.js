@@ -14,7 +14,7 @@ import firestore, { firebase } from '@react-native-firebase/firestore';
 
 export default function App() {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
@@ -24,20 +24,20 @@ export default function App() {
       const data = querySnapshot.docs.map(documentSnapshot => {
         return{
           _id: documentSnapshot.id,
-          value: '',
           date: '',
+          value: '',
           ...documentSnapshot.data()
         };
         
       });
       setData(data);
 
-      if (loading) {
-        setLoading(false);
-      }
+      // if (loading) {
+      //   setLoading(false);
+      // }
     });
     return () =>unsubscribe();
-  })
+  },[]);
 
   const submitHandler = (value, date) => {
     firestore().collection('TaskData').add({

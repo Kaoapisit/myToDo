@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import {Alert} from "react-native";
 import styled from "styled-components";
-import DatePicker from 'react-native-date-picker'
-
+import DatePicker from 'react-native-date-picker';
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 export default function AddInput({ submitHandler }) {
@@ -25,7 +25,7 @@ export default function AddInput({ submitHandler }) {
   return (
     <ComponentContainer>
       <InputContainer>
-        <Input placeholder="Add Task..." onChangeText={onChangeText} value={value} />
+        <Input placeholder="Add Task..." onChangeText={onChangeText} />
       </InputContainer>
       <CalendarButton onPress={() => setOpen(true)} >
         <AntDesign name="calendar" size={24} color="#00bf6c" />
@@ -48,7 +48,7 @@ export default function AddInput({ submitHandler }) {
           if(value.trim() !=0){
             setValue(submitHandler(value, date));
           }else{
-            alert('NO data');
+            Alert.alert('NO data');
           }
           return;
           // setValue(submitHandler(value, date));
