@@ -5,92 +5,75 @@ import AddInput from "./components/AddInput";
 import TodoList from "./components/TodoList";
 import Empty from "./components/Empty";
 import Header from "./components/Header";
-// import Loading from "./components/Loading";
 import firestore, { firebase } from '@react-native-firebase/firestore';
-
-
-
-
 
 export default function App() {
   const [data, setData] = useState([]);
-  // const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     const unsubscribe = firestore()
     .collection('TaskData')
     .onSnapshot(querySnapshot => {
-      const data = querySnapshot.docs.map(documentSnapshot => {
+      const data = querySnapshot.docs.map(docSnapshot => {
         return{
-          _id: documentSnapshot.id,
+          primaryid: docSnapshot.id,
           date: '',
           value: '',
-          ...documentSnapshot.data()
+          ...docSnapshot.data()
         };
         
       });
       setData(data);
-
-      // if (loading) {
-      //   setLoading(false);
-      // }
     });
-    return () =>unsubscribe();
   },[]);
 
   const submitHandler = (value, date) => {
     firestore().collection('TaskData').add({
       value: value,
-      date: date.toISOString().slice(0, 16),
+      date: date.toUTCString().slice(5, 16),
       key: Math.random().toString(),
     }).then(()=>{
-      console.log('Task Add Success')
+      console.log('Task Add Success.')
     })
-
-    // setData((prevTodo) => {
-    //   return [
-    //     {
-    //       value: value,
-    //       date: date.toISOString().slice(0, 10),
-    //       key: Math.random().toString(),
-    //     },
-    //     ...prevTodo,
-    //   ];
-    // });
   };
 
   const deleteItem = (key) => {
     
     return Alert.alert(
-      "Are your sure?",
-      "Are you sure you want to remove this beautiful box?",
+      "คุณแน่ใจหรือไม่?",
+      "คุณแน่ใจหรือไม่ที่ต้องการลบรายการนี้?",
       [
-        // The "Yes" button
         {
-          text: "Yes",
+          text: "ใช่ฉันแน่ใจ",
           onPress: () => {
             console.log(key)
-            const dbRef = firebase.firestore().collection('TaskData').doc(key)
-            dbRef.delete().then((res) => {
+            const unsubRef = firebase.firestore().collection('TaskData').doc(key)
+            unsubRef.delete().then(() => {
                 console.log('Item removed from database')
             })
-            // setData((prevTodo) => {
-            //   return prevTodo.filter((todo) => todo.key != key);
-            // });
           },
         },
-        // The "No" button
-        // Does nothing but dismiss the dialog when tapped
         {
-          text: "No",
+          text: "ยกเลิก",
         },
       ]
     );
   };
 
   const searchItem = (keyword) => {
-
+    console.log(keyword);
+    const unsubscribe = firestore()
+    .collection('TaskData')
+    .where('value', '>=', keyword)
+    .where('value', '<=', keyword)
+    .get().then(querySnapshot => {         
+      const users = [];                 
+      querySnapshot.forEach(doc => {                     
+        users.push(doc.data());
+        console.log(doc.data());
+      })        
+      setData(users);
+    });
   }
 
   return (
@@ -103,7 +86,7 @@ export default function App() {
           data={data}
           ListHeaderComponent={() => <Header searchItem={searchItem} />}
           ListEmptyComponent={() => <Empty />}
-          keyExtractor={(item) => item._id}
+          keyExtractor={(item) => item.primaryid}
           renderItem={({ item }) => (
             <TodoList item={item} deleteItem={deleteItem} />
           )}

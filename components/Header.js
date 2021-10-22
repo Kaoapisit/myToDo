@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-var d = new Date();
-    d.setFullYear(2564);
-let today = d.toUTCString().slice(0, 16);
+var newd = new Date();
+const year = newd.getFullYear();
+var newy = year + 543;
+    newd.setFullYear(newy);
+let today = newd.toUTCString().slice(5, 16);
 
 export default function Header({ searchItem }) {
     const [value, setValue] = useState("");
@@ -20,7 +22,7 @@ export default function Header({ searchItem }) {
             </ComponentContainer>
             <SearchContainer>
                 <InputContainer>
-                    <Input placeholder="Search..." onChangeText={onChangeText} />
+                    <Input placeholder="Search" onChangeText={onChangeText} />
                 </InputContainer>
                 <SubmitButton 
                     onPress={() => {

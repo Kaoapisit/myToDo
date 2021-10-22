@@ -8,24 +8,14 @@ export default function AddInput({ submitHandler }) {
   const [value, setValue] = useState("");
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
-
   const onChangeText = (text) => {
     setValue(text);
   };
-  // const CheckEmpty = (value, date) => {
-  //   if(value.trim() !=0){
-  //     setValue(submitHandler(value, date));
-  //   }else{
-  //     alert('NO data');
-  //   }
-  // };
-
-  
 
   return (
     <ComponentContainer>
       <InputContainer>
-        <Input placeholder="Add Task..." onChangeText={onChangeText} />
+        <Input placeholder="Add Task" onChangeText={onChangeText} value={value}/>
       </InputContainer>
       <CalendarButton onPress={() => setOpen(true)} >
         <AntDesign name="calendar" size={24} color="#00bf6c" />
@@ -33,6 +23,7 @@ export default function AddInput({ submitHandler }) {
       <DatePicker
         modal
         mode="date"
+        locale='th-TH'
         open={open}
         date={date}
         onConfirm={(date) => {
@@ -45,13 +36,20 @@ export default function AddInput({ submitHandler }) {
       />
       <SubmitButton
         onPress={() => {
-          if(value.trim() !=0){
+          if(value !=null && value.trim() !=0){
             setValue(submitHandler(value, date));
           }else{
-            Alert.alert('NO data');
+            Alert.alert(
+              'ไม่มีข้อมูลที่ต้องการเพิ่ม',
+              'กรุณากรอกข้อมูล',
+              [
+                {
+                  text: "ตกลง"
+                },
+              ]
+              );
           }
           return;
-          // setValue(submitHandler(value, date));
         }}
       >
         <AntDesign name="plus" size={24} color="#00bf6c" />

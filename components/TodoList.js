@@ -5,18 +5,25 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import styled from "styled-components";
 
 export default function TodoList({ item, deleteItem }) {
+  var date = new Date(item.date);
+  const monthNames = ["January", "February", "March", "April", "May", "June",   "July", "August", "September", "October", "November", "December" ];
+  const year = date.getFullYear()+543;
+  const month = monthNames[date.getMonth()];
+  const day = date.getDate();
+  
+
   return (
     <ComponentContainer>
       <ListContainer>
         <CirlceContainer onPress={() => {}}>
-          <Entypo name="circle" size={24} color="midnightblue" />
+          <Entypo name="circle" size={24} color="#f5b94c" />
         </CirlceContainer>
         <View>
           <TextItem>{item.value}</TextItem>
-          <TextDate>{item.date}</TextDate>
+          <TextDate>{day + ' ' + month + ' ' + year}</TextDate>
         </View>
-        <IconContainer onPress={() => deleteItem(item._id)}>
-          <MaterialIcons name="delete" size={24} color="black" />
+        <IconContainer onPress={() => deleteItem(item.primaryid)}>
+          <MaterialIcons name="delete" size={24} color="#ff5c58" />
         </IconContainer>
       </ListContainer>
     </ComponentContainer>
@@ -66,7 +73,7 @@ const CirlceContainer = styled.View`
 `;
 
 const TextDate = styled.Text`
-  color: goldenrod;
+  color: #00bf6c;
   font-size: 15px;
   margin-right: 20px;
   font-family: Poppins-Regular;
